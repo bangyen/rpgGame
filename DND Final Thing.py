@@ -147,12 +147,12 @@ while isAlive == True and hasFleed == False:
     while True:
     
         # Player action
-        playerAction = input(f"What do you do? 1.) {player.actions[0].capitalize()} 2.) {player.actions[1].capitalize()} 3.) Run ".format())
-        if playerAction == "1" or playerAction.lower() == player.actions[0]:
+        playerAction = input(f"What do you do? 1.) {player.actions[0].capitalize()} 2.) {player.actions[1].capitalize()} 3.) Run ").lower()
+        if playerAction in ["1", player.actions[0]]:
             action(player, player.actions[0], enemy)
-        elif playerAction == "2" or playerAction.lower() == player.actions[1]:
+        elif playerAction in ["2", player.actions[1]]:
             action(player, player.actions[1], enemy)
-        elif playerAction == "3" or playerAction.lower() == "run away" or playerAction.lower() == "run":
+        elif playerAction in ["3", "run away", "run"]:
             print("You got scared and ran away!\n")
             hasFleed = True
             break
