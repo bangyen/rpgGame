@@ -103,16 +103,16 @@ while True:
     
     # Ask user which type of character they would like to play
     print("First, which class would you like to take?")
-    classSelection = input("1.) Warrior, 2.) Mage, or 3.) Rogue? ")
+    classSelection = input("1.) Warrior, 2.) Mage, or 3.) Rogue? ").lower()
 
     # Uses input to define class dndType
-    if classSelection == "1" or classSelection.lower() == "warrior":
+    if classSelection in ["1", "warrior"]:
         player = dndType("warrior", 50, 16)
         break
-    elif classSelection == "2" or classSelection.lower() == "mage":
+    elif classSelection in ["2", "mage"]:
         player = dndType("mage", 30, 12)
         break
-    elif classSelection == "3" or classSelection.lower() == "rogue":
+    elif classSelection in ["3", "rogue"]:
         player = dndType("rogue", 40, 14)
         break
     else:
