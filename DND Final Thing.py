@@ -22,14 +22,14 @@ currentGold = 0
 # List of stats for all abilties
 weapons = {
 #   "example":[atkBonus, dmgBonus, dmgDiceQuantity, dmgDiceSides, healBonus, healDiceQuantity, healDiceSides], 
-    "longsword":[4, 2, 1, 8, 0, 0, 0],
-    "dagger":[4, 2, 1, 4, 0, 0, 0],
-    "shortbow":[4, 2, 1, 6, 0, 0, 0],
-    "heal":[0, 0, 0, 0, 0, 3, 4],
-    "fireball":[4, 0, 3, 6, 0, 0, 0],
-    "slam":[3, 1, 1, 6, 0, 0, 0],
-    "scimitar":[4, 2, 1, 6, 0, 0, 0],
-    "shortsword":[4, 2, 1, 6, 0, 0, 0]
+    "longsword": [4, 2, 1, 8, 0, 0, 0],
+    "dagger": [4, 2, 1, 4, 0, 0, 0],
+    "shortbow": [4, 2, 1, 6, 0, 0, 0],
+    "heal": [0, 0, 0, 0, 0, 3, 4],
+    "fireball": [4, 0, 3, 6, 0, 0, 0],
+    "slam": [3, 1, 1, 6, 0, 0, 0],
+    "scimitar": [4, 2, 1, 6, 0, 0, 0],
+    "shortsword": [4, 2, 1, 6, 0, 0, 0]
 }
 
 # List of possible enemies
@@ -42,11 +42,7 @@ possibleEnemies = [
 # Dice-rolling function
 def d(qty, sides):
     """Accepts a value for number of sides and quantity of dice, then rolls those dice."""
-    value = 0
-    while qty > 0:
-        value = value + random.randint(1, sides)
-        qty = qty - 1
-    return value
+    return sum(random.randint(1, sides) for _ in range(qty))
 
 # Player class information
 class dndType:
@@ -56,19 +52,16 @@ class dndType:
         self.maxHP = maxHP
         self.currentHP = maxHP
         self.AC = AC
-        if self.name == "warrior":
-            self.actions = ["longsword", "dagger"]
-        elif self.name == "mage":
-            self.actions = ["heal", "fireball"]
-        elif self.name == "rogue":
-            self.actions = ["dagger", "shortbow"]
-        elif self.name == "zombie":
-            self.actions = ["slam"] 
-        elif self.name == "goblin":
-            self.actions = ["scimitar", "shortbow"] 
-        elif self.name == "skeleton":
-            self.actions = ["shortsword", "shortbow"]    
-
+        action_dict = {
+            "warrior": ["longsword", "dagger"],
+            "mage": ["heal", "fireball"],
+            "rogue": ["dagger", "shortbow"],
+            "zombie": ["slam"],
+            "goblin": ["scimitar", "shortbow"],
+            "skeleton": ["shortsword", "shortbow"]
+        }
+        if self.name in action_dict:
+            self.actions = action_dict[self.name]
 
 
 # Player action function
